@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+
+$colors: (
+  primary: #40e0d0,
+  primary-dark: darken(#40e0d0, 30%),
+  primary-light: lighten(#40e0d0, 30%),
+  secondary: #f0ffff,
+  invalid: #dc143c
+);
+
+$border: 13px;
+
+// Function color for colors map
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+$desktop: 840px;
+// Mixin for media query
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: color(secondary);
+  color: color(primary-dark);
+}
+
+// Main container
+
+.container {
+  max-width: max-content;
+  min-height: max-content;
+  padding: 1.5rem;
+  margin: 0 auto;
+  background-color: color(primary-light);
+  border-radius: $border;
+  h1 {
+    text-align: center;
+    margin: 1rem auto;
+  }
+}
+
+// Form
+
+form {
+  fieldset {
+    border: 1px solid color(primary);
+    border-radius: $border;
+    margin: 0px 0px 10px;
+    padding: 1.2rem;
+    box-shadow: inset 0px 0px 15px color(primary);
+
+    legend {
+      color: color(primary);
+      border: 1px solid color(primary);
+      border-bottom: none;
+      border-radius: 6px 6px 0px 0px;
+      background: color(primary-light);
+      padding: 3px 8px;
+      box-shadow: -0px -1px 2px color(primary);
+      font-weight: normal;
+      font-size: 12px;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 15px auto 0;
+
+    label {
+      color: color(primary-dark);
+      font-weight: 700;
+    }
+
+    input {
+      width: 100%;
+      padding: 6px;
+      margin: 6px 0;
+      border: 1px solid color(primary);
+      border-radius: $border;
+      background-color: color(secondary);
+      box-shadow: inset 1px 1px 4px color(primary-light);
+      color: color(primary-dark);
+      outline: none;
+    }
+
+    input::placeholder {
+      color: color(primary);
+    }
+
+    .message {
+      height: 15px;
+      color: color(invalid);
+    }
+
+    .invalid {
+      background-color: color(secondary);
+      color: color(invalid);
+      border: 1px solid color(invalid);
+    }
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    padding: 5px 15px;
+    margin: 1rem auto;
+    border: 1px solid color(primary);
+    border-radius: $border;
+    background-color: color(primary);
+    color: color(secondary);
+    font-size: 18px;
+    transition: 0.2s ease;
+    cursor: pointer;
+    box-shadow: inset -1px -1px 4px color(primary-dark);
+    outline: none;
+    font-weight: 700;
+
+    &:hover {
+      background-color: color(primary-dark);
+    }
+    &:disabled {
+      background-color: color(primary);
+      box-shadow: none;
+      color: #999;
+      cursor: not-allowed;
+    }
+
+    &:disabled:hover {
+      background-color: color(primary);
+      box-shadow: none;
+      color: #999;
+      cursor: not-allowed;
+    }
+
+    @include desktop {
+      width: 50%;
+    }
+  }
+}
